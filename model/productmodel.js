@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
   city: { type: String },
   state: { type: String },
   zip: { type: String },
-  image: { type: String }, 
+  image: { type: String },  
 });
 
 module.exports = mongoose.model('product', productSchema);
