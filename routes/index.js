@@ -1,5 +1,5 @@
 var express = require("express");
-const { addcart, viewcart, delCart } = require("../controller/cartcontroller");
+const { addCart, viewCart, delCart } = require("../controller/cartcontroller");
 const { adduser, login } = require("../controller/regcontroller");
 const {
   createPay,
@@ -16,21 +16,16 @@ const { addProduct } = require("../controller/productController");
 const { viewProduct } = require("../controller/productController");
 var router = express.Router();
 
-
 const multer = require("multer");
 const path = require("path");
 
-// Set up multer storage
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); // folder to save the uploaded files
-  },
+  destination: function (req, file, cb) {},
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); // ensure a unique file name
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
-// File filter for only accepting images
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith("image/")) {
     cb(null, true);
@@ -39,17 +34,14 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Multer middleware for image upload
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-
-/* GET home page. */
-router.post("/addcart", addcart);
-router.get("/cart", viewcart);
+router.post("/cart", addCart);
+router.get("/cart", viewCart);
 router.post("/adduser", adduser);
 router.post("/adduser", adduser);
 router.post("/login", login);
-router.delete("/delcart/:id", delCart);
+router.delete("/cart/:id", delCart);
 router.post("/addpay", createPay);
 router.get("/viewpay", viewPay);
 router.post("/cancleorder", cancelorder);

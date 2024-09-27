@@ -1,5 +1,5 @@
 const pay = require('../model/confPay')
-const cart = require('../model/cartmodel')
+const cart = require('../model/cartModel')
 exports.confirmPay = async (req,res)=>{
     console.log("DELETE");
     await cart.deleteMany({});

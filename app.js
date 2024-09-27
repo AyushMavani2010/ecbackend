@@ -25,6 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use('/uploads', express.static('uploads'));   
 app.use(cors());
 app.get("/", (req, res) => {
   res.send("Hello, World!");
@@ -32,7 +34,7 @@ app.get("/", (req, res) => {
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-// // catch 404 and forward to error handler
+// // catch 404 and forward to error handl  er
 app.use(function (req, res, next) {
   next(createError(404));
 });
@@ -48,6 +50,6 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-app.listen(5000, () => console.log(`Dolphin app listening on port 5000!`));
+app.listen(2000, () => console.log(`Dolphin app listening on port 2000!`));
 
 module.exports = app;
