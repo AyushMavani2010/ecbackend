@@ -21,7 +21,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Make sure 'uploads/' directory exists
+    cb(null, "uploads/"); // Make sure 'uploads/' directory exists
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); // unique name for the file
@@ -53,4 +53,5 @@ router.post("/adminlogin", adminlogin);
 router.get("/delete_cart", delete_cart);
 router.post("/product", upload.single("image"), addProduct);
 router.get("/product", viewProduct);
+router.post("/payment", createPay);
 module.exports = router;
