@@ -1,26 +1,30 @@
-const paymentmodel = require("../model/paymentmodel");
-
+const paymentModel = require("../model/paymentmodel");
 exports.createPay = async (req, res) => {
-  var data = await paymentmodel.create(req.body);
-  res.status(200).json({
-    status: "Success",
-    data,
-  });
+  try {
+    const data = await paymentModel.create(req.body);
+    res.status(200).json({
+      status: "Success",
+      data,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "Error",
+      message: "Payment failed",
+    });
+  }
 };
+
 exports.viewPay = async (req, res) => {
-  var data = await paymentmodel.find();
-  res.status(200).json({
-    status: "Success",
-    data,
-  });
-};
-
-exports.cancelorder = async (req, res) => {
-  console.log("Hii");
-  var data = req.body;
-  console.log(data.length);
-
-  res.status(200).json({
-    status: "Success",
-  });
+  try {
+    const data = await paymentModel.find();
+    res.status(200).json({
+      status: "Success",
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Failed",
+      message: "Error retrieving payments",
+    });
+  }
 };
