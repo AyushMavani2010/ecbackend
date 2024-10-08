@@ -9,7 +9,6 @@ exports.addCart = async (req, res) => {
   });
 };
 
-// View the cart items
 exports.viewCart = async (req, res) => {
   var data = await cartModel.find();
   res.status(200).json({
@@ -18,7 +17,6 @@ exports.viewCart = async (req, res) => {
   });
 };
 
-// Delete all items in the cart for a specific user
 exports.delCart = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -29,14 +27,13 @@ exports.delCart = async (req, res) => {
   }
 };
 
-
 exports.deleteCartItem = async (req, res) => {
   try {
-    const itemId = req.params.itemId; // Extract itemId from URL parameters
-    const deletedItem = await cartModel.findByIdAndDelete(itemId); // Delete item by ID
+    const itemId = req.params.itemId;
+    const deletedItem = await cartModel.findByIdAndDelete(itemId);
 
     if (!deletedItem) {
-      return res.status(404).json({ message: "Item not found" }); // Handle case where item doesn't exist
+      return res.status(404).json({ message: "Item not found" });
     }
 
     res.status(200).json({ message: "Item deleted successfully", deletedItem });
